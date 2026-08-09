@@ -1,5 +1,7 @@
 # Depression Recognition
 
+> **Note:** This repository is provided solely for journal manuscript submission (code re-upload / supplementary material). It is not intended as a maintained open-source project.
+
 Multimodal depression recognition code that fuses audio features (MFCC + Prosody) and facial Action Units (AU) with BiLSTM and cross-modal fusion for binary classification.
 
 ## Files
