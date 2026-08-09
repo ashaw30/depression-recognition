@@ -8,7 +8,7 @@ target_stamp = 125
 
 
 def segment_sequence(data, seg_len, stride, num_seg):
-    """序列切片"""
+    """Slice a sequence into fixed-length segments."""
     segments = []
     for i in range(num_seg):
         start = i * stride
@@ -68,7 +68,7 @@ def load_sample(sample_id, data_dir, mfcc_dir, audio_dir, gender):
         stamps,
     )
 
-    # ================= 合并音频特征 =================
+    # ================= Merge audio features =================
     audio_segments = [
         np.concatenate([mfcc_segments[i], audio_segments[i]], axis=1)
         for i in range(stamps)
@@ -85,9 +85,9 @@ def load_sample(sample_id, data_dir, mfcc_dir, audio_dir, gender):
 
 
 if __name__ == "__main__":
-    data_dir = 'F:/视频数据文件/0_data/'
-    mfcc_dir = 'F:/视频数据文件/MFCC文件/'
-    audio_dir = 'F:/视频数据文件/MFCC文件2/'
+    data_dir = 'F:/video_data/0_data/'
+    mfcc_dir = 'F:/video_data/MFCC/'
+    audio_dir = 'F:/video_data/eGeMAPS/'
 
     sample_id = 1702974235206
     gender = 1
@@ -100,6 +100,6 @@ if __name__ == "__main__":
         gender,
     )
 
-    print("样本数量:", len(sample["audio"]))
+    print("Number of segments:", len(sample["audio"]))
     print("Audio shape:", sample["audio"][0].shape)
     print("AU shape:", sample["au"][0].shape)

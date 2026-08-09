@@ -1,17 +1,17 @@
 # Depression Recognition
 
-多模态抑郁症识别代码：融合音频（MFCC + Prosody）与面部动作单元（AU），基于 BiLSTM + 跨模态融合进行分类。
+Multimodal depression recognition code that fuses audio features (MFCC + Prosody) and facial Action Units (AU) with BiLSTM and cross-modal fusion for binary classification.
 
-## 文件说明
+## Files
 
-| 文件 | 说明 |
-|------|------|
-| `model.py` | 数据集、模型、训练与验证主流程 |
-| `sample_data.py` | 单样本特征加载与分段（AU stride=100） |
-| `analysis.py` | 加载已训练模型，对单样本做推理（AU stride=75） |
-| `best_model.pth` | 预训练权重 |
+| File | Description |
+|------|-------------|
+| `model.py` | Dataset, model, training, and validation pipeline |
+| `sample_data.py` | Single-sample feature loading and segmentation (AU stride=100) |
+| `analysis.py` | Inference with a trained model on a single sample (AU stride=75) |
+| `best_model.pth` | Pretrained model weights |
 
-## 环境依赖
+## Requirements
 
 - Python 3
 - PyTorch
@@ -22,28 +22,28 @@
 pip install torch numpy pandas scikit-learn
 ```
 
-## 使用方法
+## Usage
 
-**训练**（需先将 `model.py` 中 `load_data()` 的 pkl 路径改为本地数据路径）：
+**Training** (update the pickle paths in `load_data()` inside `model.py` to your local data paths first):
 
 ```bash
 python model.py --hidden_dim 128 --lr 1e-4 --epochs 50
 ```
 
-**单样本推理**（修改 `analysis.py` 中的数据目录与 `sample_id`）：
+**Single-sample inference** (update the data directories and `sample_id` in `analysis.py`):
 
 ```bash
 python analysis.py
 ```
 
-**查看分段特征形状**：
+**Inspect segmented feature shapes**:
 
 ```bash
 python sample_data.py
 ```
 
-## 说明
+## Notes
 
-- 默认随机种子 `SEED=42`，验证集比例 0.2（分层划分）
-- 预测阈值：概率 > 0.5 判为抑郁
-- `analysis.py` 与 `sample_data.py` 的 AU 分段步长不同，请按用途区分
+- Default random seed `SEED=42`; validation split ratio 0.2 (stratified)
+- Decision threshold: probability > 0.5 is predicted as depression
+- `analysis.py` and `sample_data.py` use different AU segmentation strides; choose according to the intended use

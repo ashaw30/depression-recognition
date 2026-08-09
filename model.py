@@ -179,16 +179,16 @@ class Trainer:
 # ==================== Load Data ====================
 
 def load_data():
-    with open("f:/0000项目文件/项目workspace/0final/data_dict_125.pkl", "rb") as f:
+    with open("f:/project_workspace/0final/data_dict_125.pkl", "rb") as f:
         loaded = pickle.load(f)
 
-    with open("f:/0000项目文件/项目workspace/0final/mfcc_data_dict_125.pkl", "rb") as f:
+    with open("f:/project_workspace/0final/mfcc_data_dict_125.pkl", "rb") as f:
         mfcc = pickle.load(f)
 
-    with open("f:/0000项目文件/项目workspace/0final/au_data_dict_125.pkl", "rb") as f:
+    with open("f:/project_workspace/0final/au_data_dict_125.pkl", "rb") as f:
         au = pickle.load(f)
 
-    with open("f:/0000项目文件/项目workspace/0final/audio_data_dict_125.pkl", "rb") as f:
+    with open("f:/project_workspace/0final/audio_data_dict_125.pkl", "rb") as f:
         prosody = pickle.load(f)
 
     gender = np.array(loaded["_sexs"]).reshape(-1, 1)

@@ -10,7 +10,7 @@ from model import MultiModalDepressionClassifier
 target_stamp = 125
 
 
-# ==================== 分段函数 ====================
+# ==================== Segmentation ====================
 
 def segment_sequence(data, seg_len, stride, num_seg):
     segments = []
@@ -20,7 +20,7 @@ def segment_sequence(data, seg_len, stride, num_seg):
     return segments
 
 
-# ==================== 加载样本 ====================
+# ==================== Load Sample ====================
 
 def load_sample(sample_id, data_dir, mfcc_dir, audio_dir, gender):
     # ---------- AU ----------
@@ -73,7 +73,7 @@ def load_sample(sample_id, data_dir, mfcc_dir, audio_dir, gender):
         stamps,
     )
 
-    # ---------- 合并音频特征 ----------
+    # ---------- Merge audio features ----------
     audio_segments = [
         np.concatenate([mfcc_segments[i], prosody_segments[i]], axis=1)
         for i in range(stamps)
@@ -87,7 +87,7 @@ def load_sample(sample_id, data_dir, mfcc_dir, audio_dir, gender):
     return sample_dict
 
 
-# ==================== 加载模型 ====================
+# ==================== Load Model ====================
 
 def load_model(model_path, config):
     model = MultiModalDepressionClassifier(config)
@@ -96,7 +96,7 @@ def load_model(model_path, config):
     return model
 
 
-# ==================== 预测函数 ====================
+# ==================== Prediction ====================
 
 def predict_sample(model, sample):
     audio_list = sample["audio"]
@@ -112,7 +112,7 @@ def predict_sample(model, sample):
             prob = model(audio, au, gender).item()
         probs.append(prob)
 
-    # 多段平均
+    # Average over segments
     final_prob = np.mean(probs)
     label = 1 if final_prob > 0.5 else 0
     result = {
@@ -123,16 +123,16 @@ def predict_sample(model, sample):
     return result
 
 
-# ==================== 主程序 ====================
+# ==================== Main ====================
 
 if __name__ == "__main__":
-    data_dir = 'F:/视频数据文件/0_data/'
-    mfcc_dir = 'F:/视频数据文件/MFCC文件/'
-    audio_dir = 'F:/视频数据文件/MFCC文件2/'
+    data_dir = 'F:/video_data/0_data/'
+    mfcc_dir = 'F:/video_data/MFCC/'
+    audio_dir = 'F:/video_data/eGeMAPS/'
     sample_id = 1702974235206
     gender = 1
 
-    # ---------- 加载样本 ----------
+    # ---------- Load sample ----------
     sample = load_sample(
         sample_id,
         data_dir,
@@ -141,15 +141,15 @@ if __name__ == "__main__":
         gender,
     )
 
-    # ---------- 配置 ----------
+    # ---------- Config ----------
     class Config:
         hidden_dim = 128
 
-    # ---------- 加载模型 ----------
+    # ---------- Load model ----------
     model = load_model("best_model.pth", Config)
 
-    # ---------- 预测 ----------
+    # ---------- Predict ----------
     result = predict_sample(model, sample)
 
-    print("预测结果：")
+    print("Prediction result:")
     print(result)
