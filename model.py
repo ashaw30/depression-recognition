@@ -178,17 +178,18 @@ class Trainer:
 
 # ==================== Load Data ====================
 
-def load_data():
-    with open("f:/project_workspace/0final/data_dict_125.pkl", "rb") as f:
+def load_data(data_dir="./data/processed"):
+    # Placeholders: put your pickle files under data_dir (or pass a custom path).
+    with open(f"{data_dir}/data_dict_125.pkl", "rb") as f:
         loaded = pickle.load(f)
 
-    with open("f:/project_workspace/0final/mfcc_data_dict_125.pkl", "rb") as f:
+    with open(f"{data_dir}/mfcc_data_dict_125.pkl", "rb") as f:
         mfcc = pickle.load(f)
 
-    with open("f:/project_workspace/0final/au_data_dict_125.pkl", "rb") as f:
+    with open(f"{data_dir}/au_data_dict_125.pkl", "rb") as f:
         au = pickle.load(f)
 
-    with open("f:/project_workspace/0final/audio_data_dict_125.pkl", "rb") as f:
+    with open(f"{data_dir}/audio_data_dict_125.pkl", "rb") as f:
         prosody = pickle.load(f)
 
     gender = np.array(loaded["_sexs"]).reshape(-1, 1)

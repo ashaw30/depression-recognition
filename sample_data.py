@@ -85,9 +85,10 @@ def load_sample(sample_id, data_dir, mfcc_dir, audio_dir, gender):
 
 
 if __name__ == "__main__":
-    data_dir = 'F:/video_data/0_data/'
-    mfcc_dir = 'F:/video_data/MFCC/'
-    audio_dir = 'F:/video_data/eGeMAPS/'
+    # Placeholders: point these directories to your local feature files.
+    data_dir = './data/au/'
+    mfcc_dir = './data/mfcc/'
+    audio_dir = './data/egemaps/'
 
     sample_id = 1702974235206
     gender = 1

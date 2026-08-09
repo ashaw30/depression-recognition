@@ -22,15 +22,37 @@ Multimodal depression recognition code that fuses audio features (MFCC + Prosody
 pip install torch numpy pandas scikit-learn
 ```
 
+## Data Paths
+
+Paths in this repository are **relative placeholders** and are not machine-specific.
+Replace them with your local data locations before running.
+
+Suggested layout:
+
+```text
+./data/
+  processed/          # training pickles used by model.py
+    data_dict_125.pkl
+    mfcc_data_dict_125.pkl
+    au_data_dict_125.pkl
+    audio_data_dict_125.pkl
+  au/                 # AU CSV files for single-sample scripts
+  mfcc/               # MFCC CSV files
+  egemaps/            # eGeMAPS / prosody CSV files
+```
+
+- Training (`model.py`): edit `load_data(data_dir=...)` or place pickles under `./data/processed/`
+- Inference / inspection (`analysis.py`, `sample_data.py`): edit `data_dir`, `mfcc_dir`, and `audio_dir` at the bottom of each script
+
 ## Usage
 
-**Training** (update the pickle paths in `load_data()` inside `model.py` to your local data paths first):
+**Training**:
 
 ```bash
 python model.py --hidden_dim 128 --lr 1e-4 --epochs 50
 ```
 
-**Single-sample inference** (update the data directories and `sample_id` in `analysis.py`):
+**Single-sample inference** (also set `sample_id` in `analysis.py`):
 
 ```bash
 python analysis.py
